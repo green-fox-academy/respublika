@@ -1,5 +1,6 @@
 # respublika<br />
-Greenfox repository for respublika<br />
+Greenfox repository for Teglas Szilvia<br />
+Group: Accenture CodeGirlz 2018<br />
 ## Week-01 Practice command line and git<br />
 links for tasks:<br />
 https://github.com/respublika/git-lesson-repository.git<br />
