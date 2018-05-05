@@ -18,8 +18,7 @@ public class Cohort {
                 mentors.size() + " mentors.");
     }
 
-    public void addStudent(Student student) {
-        this.students.add(student);
+    public void addStudent(Student student) {this.students.add(student);
     }
 
     public void addMentor(Mentor mentor) {
