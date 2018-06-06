@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Random;
 
 
 @Controller
@@ -13,7 +14,12 @@ public class HelloWebMoreLanguages {
 
     @RequestMapping("/web/greetings")
     public String greetings(Model model) {
-        model.addAttribute("hellos", hellos);
+        Random rand = new Random();
+        int  r1 = rand.nextInt(49);
+        int  r2 = rand.nextInt(255);
+        model.addAttribute("hello", hellos[r1]);
+        model.addAttribute("font", (r1+20)+"pt");
+        model.addAttribute("color", "rgb("+r2+", "+200+", "+r2+")");
         return "greetings";
     }
 }

@@ -5,13 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div>
-    <div class="list-group">
-        <a th:each="hellos : ${hellos}">
-            <p th:text="${hellos}"/>
-        </a>
-    </div>
-</div>
+<p th:style="|color: ${color}; font-size:${font} |" th:text=" ${hello}"/>
+    </p>
 </body>
 </html>
 
