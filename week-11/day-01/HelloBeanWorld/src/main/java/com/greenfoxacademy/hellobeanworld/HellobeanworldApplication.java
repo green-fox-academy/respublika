@@ -1,6 +1,6 @@
 package com.greenfoxacademy.hellobeanworld;
 
-import com.greenfoxacademy.hellobeanworld.services.MyColorGreen;
+import com.greenfoxacademy.hellobeanworld.services.MyColorYellow;
 import com.greenfoxacademy.hellobeanworld.services.Printer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +14,7 @@ public class HellobeanworldApplication implements CommandLineRunner {
     Printer printer;
 
     @Autowired
-    MyColorGreen green;
+    MyColorYellow myColorYellow;
 
     public static void main(String[] args) {
         SpringApplication.run(HellobeanworldApplication.class, args);
@@ -22,8 +22,7 @@ public class HellobeanworldApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        printer.log("hello");
-        green.printColor();
+        printer.log(myColorYellow, "hello");
     }
 
 

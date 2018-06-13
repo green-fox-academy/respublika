@@ -1,8 +1,11 @@
 package com.greenfoxacademy.hellobeanworld.services;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MyColorYellow implements MyColor {
     @Override
-    public void printColor() {
-        System.out.println("It's yellow.");
+    public String printColor() {
+        return "yellow.";
     }
 }
