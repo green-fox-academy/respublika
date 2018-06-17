@@ -10,5 +10,6 @@ public interface BankService {
     void add(BankAccount bankAccount);
     ArrayList<BankAccount> getAllAccount();
     void createAccounts();
+    void raiseAccounts();
 }
 

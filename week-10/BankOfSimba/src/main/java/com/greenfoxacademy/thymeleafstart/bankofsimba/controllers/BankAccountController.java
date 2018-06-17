@@ -5,14 +5,14 @@ import com.greenfoxacademy.thymeleafstart.bankofsimba.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 public class BankAccountController {
     private final
     BankService bankService;
+
 
     @Autowired
     public BankAccountController(BankService bankService) {
@@ -41,5 +41,25 @@ public class BankAccountController {
         bankService.createAccounts();
         model.addAttribute("accounts", bankService.getAllAccount());
         return "getAccounts";
+    }
+
+    @RequestMapping("/newaccount")
+    public String addAccount() {
+        return "addAccount";
+    }
+
+    //why i have to add bankAccount (or why i have to add anything) when i don't need any new object here?
+    @RequestMapping(value = "/showmore", method = RequestMethod.POST)
+    public String raiseAccounts(@ModelAttribute("raise") BankAccount bankAccount) {
+        bankService.raiseAccounts();
+        return "redirect:/showmore";
+    }
+
+    @RequestMapping(value = "/newaccount", method = RequestMethod.POST)
+    public String addAccount(@ModelAttribute("newAccount") BankAccount bankAccount, Model model) {
+        bankService.add(new BankAccount(bankAccount.getName(), bankAccount.getBalance(), bankAccount.getAnimalType(), bankAccount.getIsKing(), bankAccount.getCharacter()));
+        model.addAttribute("accounts", bankService.getAllAccount());
+        return "redirect:/showmore";
+
     }
 }

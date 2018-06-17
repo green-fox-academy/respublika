@@ -2,7 +2,6 @@ package com.greenfoxacademy.thymeleafstart.bankofsimba.services;
 
 import com.greenfoxacademy.thymeleafstart.bankofsimba.models.BankAccount;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 
 @Service
@@ -28,6 +27,14 @@ public class BankAccountService implements BankService {
         bankAccounts.add(new BankAccount("Pumbaa", 700.0, "WARTHOG", "Good Guy"));
         bankAccounts.add(new BankAccount("Rafiki", 2200.0, "MANDRILL", "Good Guy"));
         bankAccounts.add(new BankAccount("Zazu", 200.0, "HORNBILL", "Good Guy"));
+    }
+
+    @Override
+    public void raiseAccounts() {
+        for (BankAccount account:this.bankAccounts) {
+            account.raiseBalance();
+
+        }
     }
 
 }

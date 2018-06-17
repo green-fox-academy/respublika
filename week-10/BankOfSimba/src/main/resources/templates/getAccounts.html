@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
 <head>
     <title>Bank of Simba Accounts</title>
     <meta charset="utf-8"/>
@@ -23,8 +23,11 @@
         <td th:text="${currentAccount.animalType}"></td>
         <td style="color:darkslateblue"> <em><b th:text="${currentAccount.isKing}"/></em></td>
         <td th:text="${currentAccount.character}"></td>
-
     </tr>
 </table>
+<form id="raise" action="" method="POST">
+    <p><button type="submit">Raise balance</button></p>
+</form>
 </body>
 </html>
+

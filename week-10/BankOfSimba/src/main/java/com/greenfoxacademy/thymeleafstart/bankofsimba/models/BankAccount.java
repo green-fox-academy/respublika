@@ -2,12 +2,11 @@ package com.greenfoxacademy.thymeleafstart.bankofsimba.models;
 
 
 public class BankAccount {
-    String name;
-    Double balance;
-    String animalType;
-    String isKing;
-    String character;
-
+    private String name;
+    private Double balance;
+    private String animalType;
+    private String isKing;
+    private String character;
 
     public BankAccount() {
     }
@@ -71,5 +70,13 @@ public class BankAccount {
 
     public void setCharacter(String character) {
         this.character = character;
+    }
+
+    public void raiseBalance() {
+        if (this.isKing=="King") {
+            this.balance+=100;
+        } else {
+            this.balance+=10;
+        }
     }
 }
