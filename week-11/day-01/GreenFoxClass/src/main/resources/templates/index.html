@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main page of Greenfox Academy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Available pages:</h1>
+    <li><a href="http://localhost:8080/gfa/list">List of students</a></li>
+    <li><a href="http://localhost:8080/gfa/add">Add new student</a></li>
+    <li><a href="http://localhost:8080/gfa/check">Check student</a></li>
+<p th:text="'Number of students: '+${number}"></p>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Greenfox Academy Students:</h1>
+<ul th:each="student : ${students}">
+    <li th:text="${student}"></li>
+</ul>
+<form id="export" action="" method="POST">
+    <p><button type="submit">Export list</button></p>
+</form>
+</body>
+</html>

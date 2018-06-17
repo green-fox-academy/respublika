@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Check student</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<p th:text="${studentName}+${message}"></p>
+<h4>Check another student:</h4>
+<form id="checkStudent" action="" method="post">
+    <div><label for="name">Student name:</label>
+        <input type="text" id="name" name="name"/></div>
+    <p><button type="submit">Check</button></p>
+</form>
+</body>
+</html>
