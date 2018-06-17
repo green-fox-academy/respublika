@@ -4,9 +4,10 @@
     <title>Bank of Simba Accounts</title>
     <meta charset="utf-8"/>
 </head>
-<body>
-<table style="width:50%; height:200px; font-size: large">
-    <tr style="background-color:green">
+<body style="background-color: #dfff80">
+<h1 style="font-family: 'Arial Black'">BANK OF SIMBA ACCOUNTS</h1>
+<table style="width:50%; height:200px; font-size: medium">
+    <tr style="background-color:green; font-family: 'Arial Black'; color: #dfff80" >
         <th>INDEX</th>
         <th>NAME</th>
         <th>BALANCE</th>
@@ -15,7 +16,7 @@
         <th>CHARACTER TYPE</th>
 
     </tr>
-    <tr th:each="currentAccount : ${accounts}" style="background-color:lightgreen" align="left">
+    <tr th:each="currentAccount : ${accounts}" style="background-color:#4dff4d; font-family: Arial" align="left">
         <td th:text="${currentAccountStat.index}"></td>
         <td th:text="${currentAccount.name}"></td>
         <td th:text="${currentAccount.balance} + ' Zebra'"></td>
