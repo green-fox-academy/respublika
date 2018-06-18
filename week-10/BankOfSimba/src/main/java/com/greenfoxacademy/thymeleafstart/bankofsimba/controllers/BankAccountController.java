@@ -38,7 +38,6 @@ public class BankAccountController {
 
     @RequestMapping("/showmore")
     public String getAccounts(Model model) {
-        bankService.createAccounts();
         model.addAttribute("accounts", bankService.getAllAccount());
         return "getAccounts";
     }
@@ -48,9 +47,8 @@ public class BankAccountController {
         return "addAccount";
     }
 
-    //why i have to add bankAccount (or why i have to add anything) when i don't need any new object here?
     @RequestMapping(value = "/showmore", method = RequestMethod.POST)
-    public String raiseAccounts(@ModelAttribute("raise") BankAccount bankAccount) {
+    public String raiseAccounts() {
         bankService.raiseAccounts();
         return "redirect:/showmore";
     }
