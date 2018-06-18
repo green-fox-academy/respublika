@@ -6,10 +6,8 @@
 </head>
 <body>
 <li><a href="http://localhost:8080/pfc/information">Information</a></li>
-<img src="greenfox.png" alt="Fox">
-<p>This is Mr. Fox. Currently living in pizza and lemonade. He knows 2 tricks.</p>
+<img src="/greenfox.png" alt="Fox">
+<p th:text="'This is '+${name}+'. Currently living on salad and water. He knows 0 tricks.'"></p>
 <h1>Known tricks</h1>
-<li>write HTML</li>
-<li>code in Java</li>
 </body>
 </html>
