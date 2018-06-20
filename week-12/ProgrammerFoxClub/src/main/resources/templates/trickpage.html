@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trick Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<li><a href="http://localhost:8080/pfc/information">Information</a></li>
+<li><a href="http://localhost:8080/pfc/nutritionStore">Nutrition Store</a></li>
+<li><a href="http://localhost:8080/pfc/trickCenter">Trick Center</a></li>
+<li><a href="http://localhost:8080/pfc/actionHistory">Action History</a></li>
+<form action="/pfc/trickCenter" id="learn">
+    Tricks:<select name="tricklist" form="learn">
+    <option value="html">Write HTML</option>
+    <option value="java">Code Java</option>
+    <option value="sleep">Sleep</option>
+    <option value="eat">Eat</option>
+    <option value="play">Play</option>
+</select><input type="submit" >
+</form>
+
+</body>
+</html>
