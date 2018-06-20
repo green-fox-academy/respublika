@@ -5,19 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<li><a href="http://localhost:8080/pfc/information">Information</a></li>
-<li><a href="http://localhost:8080/pfc/nutritionStore">Nutrition Store</a></li>
-<li><a href="http://localhost:8080/pfc/trickCenter">Trick Center</a></li>
-<li><a href="http://localhost:8080/pfc/actionHistory">Action History</a></li>
-<form action="/pfc/trickCenter" id="learn">
-    Tricks:<select name="tricklist" form="learn">
-    <option value="html">Write HTML</option>
-    <option value="java">Code Java</option>
-    <option value="sleep">Sleep</option>
-    <option value="eat">Eat</option>
-    <option value="play">Play</option>
-</select><input type="submit" >
+<li><a th:href="'http://localhost:8080/pfc/information?foxname='+${foxname}">Information</a></li>
+<li><a th:href="'http://localhost:8080/pfc/nutritionStore?foxname='+${foxname}">Nutrition Store</a></li>
+<li><a th:href="'http://localhost:8080/pfc/trickCenter?foxname='+${foxname}">Trick Center</a></li>
+<li><a th:href="'http://localhost:8080/pfc/actionHistory?foxname='+${foxname}">Action History</a></li>
+<form th:action="'http://localhost:8080/pfc?name='+${foxname}">
+    <select name="trick">
+        <option value="Write HTML">Write HTML</option>
+        <option value="Code Java">Code Java</option>
+        <option value="Play with CSS">Play with CSS</option>
+    </select>
+    <input type="submit" value="Submit">
 </form>
-
 </body>
 </html>

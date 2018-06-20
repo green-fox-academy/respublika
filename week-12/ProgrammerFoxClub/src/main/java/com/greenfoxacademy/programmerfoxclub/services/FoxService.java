@@ -14,7 +14,9 @@ public class FoxService {
     }
 
     public void addFox(String name) {
-        foxes.put(name, new Fox(name));
+        if (!foxes.containsKey(name)) {
+            foxes.put(name, new Fox(name));
+        }
     }
 
     public Fox getFox(String name) {
