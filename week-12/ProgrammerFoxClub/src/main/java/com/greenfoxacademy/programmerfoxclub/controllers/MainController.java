@@ -19,26 +19,30 @@ public class MainController {
     }
 
     @RequestMapping("/pfc")
-    public String home(@RequestParam(name="name", required=false, defaultValue="Mr. Fox") String foxname, Model model) {
-        foxService.addFox(foxname);
-        model.addAttribute("name", foxname);
-        model.addAttribute("food", foxService.getFox(foxname).getFood());
-        model.addAttribute("drink", foxService.getFox(foxname).getDrink());
-        model.addAttribute("nbtricks", foxService.getFox(foxname).getTricks().size());
-        model.addAttribute("knowntricks", foxService.getFox(foxname).knownTricks());
-        model.addAttribute("tricks", foxService.getFox(foxname).getTricks());
+    public String home(@RequestParam(name="name", required=false, defaultValue="Mr. Fox") String name, Model model) {
+        foxService.addFox(name);
+        model.addAttribute("name", name);
+        model.addAttribute("food", foxService.getFox(name).getFood());
+        model.addAttribute("drink", foxService.getFox(name).getDrink());
+        model.addAttribute("nbtricks", foxService.getFox(name).getTricks().size());
+        model.addAttribute("knowntricks", foxService.getFox(name).knownTricks());
+        model.addAttribute("tricks", foxService.getFox(name).getTricks());
+        model.addAttribute("hasactions", foxService.getFox(name).hasActions());
+        model.addAttribute("actions", foxService.getFox(name).getActions());
         return "index";
     }
 
     @RequestMapping("/pfc/information")
-    public String info(@RequestParam(name="name", required=true, defaultValue="Mr. Fox") String foxname, Model model) {
-        foxService.addFox(foxname);
-        model.addAttribute("name", foxname);
-        model.addAttribute("food", foxService.getFox(foxname).getFood());
-        model.addAttribute("drink", foxService.getFox(foxname).getDrink());
-        model.addAttribute("nbtricks", foxService.getFox(foxname).getTricks().size());
-        model.addAttribute("knowntricks", foxService.getFox(foxname).knownTricks());
-        model.addAttribute("tricks", foxService.getFox(foxname).getTricks());
+    public String info(@RequestParam(name="name", required=true, defaultValue="Mr. Fox") String name, Model model) {
+        foxService.addFox(name);
+        model.addAttribute("name", name);
+        model.addAttribute("food", foxService.getFox(name).getFood());
+        model.addAttribute("drink", foxService.getFox(name).getDrink());
+        model.addAttribute("nbtricks", foxService.getFox(name).getTricks().size());
+        model.addAttribute("knowntricks", foxService.getFox(name).knownTricks());
+        model.addAttribute("tricks", foxService.getFox(name).getTricks());
+        model.addAttribute("hasactions", foxService.getFox(name).hasActions());
+        model.addAttribute("actions", foxService.getFox(name).getActions());
         return "index";
     }
 
@@ -62,8 +66,7 @@ public class MainController {
     @PostMapping(value = "/pfc/trickCenter")
     public String trickBack(@ModelAttribute("tricks") String trick,
                             @ModelAttribute("name") String name) {
-        System.out.println(name);
-        System.out.println(trick);
+        foxService.getFox(name).addAction(trick, "trick");
         foxService.getFox(name).addTrick(trick);
         return "redirect:/pfc/information?name="+name;
     }
@@ -78,8 +81,11 @@ public class MainController {
     public String nutriBack(@ModelAttribute("drink") String drink,
                             @ModelAttribute("food") String food,
                             @ModelAttribute("name") String name) {
+        foxService.getFox(name).addAction(drink, "drink");
+        foxService.getFox(name).addAction(food, "food");
         foxService.getFox(name).setDrink(drink);
         foxService.getFox(name).setFood(food);
         return "redirect:/pfc/information?name="+name;
     }
+
 }

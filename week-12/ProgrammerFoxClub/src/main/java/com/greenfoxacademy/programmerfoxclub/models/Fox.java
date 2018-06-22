@@ -1,12 +1,25 @@
 package com.greenfoxacademy.programmerfoxclub.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Fox {
     private String name;
     private ArrayList<String> tricks;
     private String food;
     private String drink;
+
+    public ArrayList<String> getActions() {
+        return actions;
+    }
+
+    public void setActions(ArrayList<String> actions) {
+        this.actions = actions;
+    }
+
+    private ArrayList<String> actions;
 
     public Fox() {
     }
@@ -16,6 +29,7 @@ public class Fox {
         this.food="salad";
         this.drink="water";
         this.tricks=new ArrayList<>();
+        this.actions=new ArrayList<>();
     }
 
     public String getName() {
@@ -60,11 +74,37 @@ public class Fox {
         return b;
     }
 
+    public boolean hasActions() {
+        boolean b;
+        if (actions.size()==0) {
+            b=false;
+        } else {
+            b=true;
+        }
+        return b;
+    }
+
     public void addTrick(String trick) {
         if (!this.tricks.contains(trick)) {
             this.tricks.add(trick);
         }
     }
 
-
+    public void addAction(String item, String action) {
+        if (this.drink!=item && action=="drink") {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            this.actions.add(dateFormat.format(date)+" : Drink has been changed from:"+this.drink+" to:"+item);
+        }
+        if (this.food!=item && action=="food") {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            this.actions.add(dateFormat.format(date)+" : Food has been changed from:"+this.food+" to:"+item);
+        }
+        if (!this.tricks.contains(item) && action=="trick") {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            this.actions.add(dateFormat.format(date)+" : Learned to:"+item);
+        }
+    }
 }

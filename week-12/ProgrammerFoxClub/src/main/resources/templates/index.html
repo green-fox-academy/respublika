@@ -20,6 +20,16 @@
 <div th:unless="${knowntricks}">
     <div>Fox doesn't know any tricks yet. Go and learn some.</div>
 </div>
+
+<h1>Action history</h1>
+<div th:if="${hasactions}">
+    <ul th:each="action : ${actions}">
+        <li th:text="${action}"></li>
+    </ul>
+</div>
+<div th:unless="${hasactions}">
+    <div>Fox hasn't got any history. Go and do something.</div>
+</div>
 </body>
 </html>
 
