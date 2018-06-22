@@ -5,12 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<li><a th:href="'http://localhost:8080/pfc/information?foxname='+${foxname}">Information</a></li>
-<li><a th:href="'http://localhost:8080/pfc/nutritionStore?foxname='+${foxname}">Nutrition Store</a></li>
-<li><a th:href="'http://localhost:8080/pfc/trickCenter?foxname='+${foxname}">Trick Center</a></li>
-<li><a th:href="'http://localhost:8080/pfc/actionHistory?foxname='+${foxname}">Action History</a></li>
+<li><a th:href="'http://localhost:8080/pfc/information?name='+${name}">Information</a></li>
+<li><a th:href="'http://localhost:8080/pfc/nutritionStore?name='+${name}">Nutrition Store</a></li>
+<li><a th:href="'http://localhost:8080/pfc/trickCenter?name='+${name}">Trick Center</a></li>
+<li><a th:href="'http://localhost:8080/pfc/actionHistory?name='+${name}">Action History</a></li>
 <img src="/greenfox.png" alt="Fox">
-<p th:text="'This is '+${foxname}+'. Currently living on '+${food}+' and '+${drink}+'. It knows '+${nbtricks}+' tricks.'"></p>
+<p th:text="'This is '+${name}+'. Currently living on '+${food}+' and '+${drink}+'. It knows '+${nbtricks}+' tricks.'"></p>
 <h1>Known tricks</h1>
 <div th:if="${knowntricks}">
     <ul th:each="trick : ${tricks}">

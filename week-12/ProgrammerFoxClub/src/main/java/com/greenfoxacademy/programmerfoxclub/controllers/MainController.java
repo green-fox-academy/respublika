@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @Controller
 public class MainController {
     private final
@@ -17,9 +19,21 @@ public class MainController {
     }
 
     @RequestMapping("/pfc")
-    public String home(@RequestParam(name="foxname", required=true, defaultValue="Mr. Fox") String foxname, Model model) {
+    public String home(@RequestParam(name="name", required=false, defaultValue="Mr. Fox") String foxname, Model model) {
         foxService.addFox(foxname);
-        model.addAttribute("foxname", foxname);
+        model.addAttribute("name", foxname);
+        model.addAttribute("food", foxService.getFox(foxname).getFood());
+        model.addAttribute("drink", foxService.getFox(foxname).getDrink());
+        model.addAttribute("nbtricks", foxService.getFox(foxname).getTricks().size());
+        model.addAttribute("knowntricks", foxService.getFox(foxname).knownTricks());
+        model.addAttribute("tricks", foxService.getFox(foxname).getTricks());
+        return "index";
+    }
+
+    @RequestMapping("/pfc/information")
+    public String info(@RequestParam(name="name", required=true, defaultValue="Mr. Fox") String foxname, Model model) {
+        foxService.addFox(foxname);
+        model.addAttribute("name", foxname);
         model.addAttribute("food", foxService.getFox(foxname).getFood());
         model.addAttribute("drink", foxService.getFox(foxname).getDrink());
         model.addAttribute("nbtricks", foxService.getFox(foxname).getTricks().size());
@@ -34,22 +48,23 @@ public class MainController {
     }
 
     @PostMapping(value = "/pfc/login")
-    public String loginGet(@ModelAttribute("foxname") String foxname) {
-        return "redirect:/pfc?foxname="+foxname;
+    public String loginGet(@ModelAttribute("name") String name) {
+        return "redirect:/pfc/information?name="+name;
     }
 
     @GetMapping("/pfc/trickCenter")
-    public String trick(@RequestParam("foxname") String foxname, Model model) {
-        model.addAttribute("foxname", foxname);
+    public String trick(@RequestParam("name") String name, Model model, ArrayList<String> tricks) {
+        model.addAttribute("name", name);
+        model.addAttribute("tricks", foxService.getFox(name).getTricks());
         return "trickpage";
     }
 
     @PostMapping(value = "/pfc/trickCenter")
-    public String trickBack(@ModelAttribute("foxname") String foxname, @ModelAttribute("trick") String trick) {
-        System.out.println(foxname);
+    public String trickBack(@ModelAttribute("tricks") String trick,
+                            @ModelAttribute("name") String name) {
+        System.out.println(name);
         System.out.println(trick);
-        foxService.getFox(foxname).addTrick(trick);
-        return "redirect:/pfc?foxname="+foxname;
+        foxService.getFox(name).addTrick(trick);
+        return "redirect:/pfc/information?name="+name;
     }
-
 }
