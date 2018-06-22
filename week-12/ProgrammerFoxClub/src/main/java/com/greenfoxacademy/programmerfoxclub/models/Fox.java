@@ -61,7 +61,9 @@ public class Fox {
     }
 
     public void addTrick(String trick) {
-        this.tricks.add(trick);
+        if (!this.tricks.contains(trick)) {
+            this.tricks.add(trick);
+        }
     }
 
 

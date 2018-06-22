@@ -67,4 +67,19 @@ public class MainController {
         foxService.getFox(name).addTrick(trick);
         return "redirect:/pfc/information?name="+name;
     }
+
+    @GetMapping("/pfc/nutritionStore")
+    public String nutri(@RequestParam("name") String name, Model model) {
+        model.addAttribute("name", name);
+        return "nutrition";
+    }
+
+    @PostMapping(value = "/pfc/nutritionStore")
+    public String nutriBack(@ModelAttribute("drink") String drink,
+                            @ModelAttribute("food") String food,
+                            @ModelAttribute("name") String name) {
+        foxService.getFox(name).setDrink(drink);
+        foxService.getFox(name).setFood(food);
+        return "redirect:/pfc/information?name="+name;
+    }
 }
