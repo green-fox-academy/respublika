@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Trick Page</title>
+    <title>Action History</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
@@ -11,22 +11,17 @@
 <li><a th:href="'http://localhost:8080/pfc/trickCenter?name='+${name}">Trick Center</a></li>
 <li><a th:href="'http://localhost:8080/pfc/actionHistory?name='+${name}">Action History</a></li>
 <img src="/greenfox.png" alt="Fox">
-<div th:if="${hasTrickToLearn}">
-    <form id="tricks" action="" method="post">
-        <div>
-            <label for="trick">Tricks:</label>
-            <select id="trick" name="trick">
-                <option th:each="trick : ${tricks}"
-                        th:value="${trick}"
-                        th:utext="${trick}">
-                </option>
-            </select>
-            <input type="submit" value="Learn">
-        </div>
-    </form>
+
+<h1>Action history</h1>
+<div th:if="${hasactions}">
+    <ul th:each="action : ${actions}">
+        <li th:text="${action}"></li>
+    </ul>
 </div>
-<div th:unless="${hasTrickToLearn}">
-    <div>Fox has already learned all available tricks.</div>
+<div th:unless="${hasactions}">
+    <div>Fox hasn't got any history. Go and do something.</div>
 </div>
 </body>
 </html>
+
+

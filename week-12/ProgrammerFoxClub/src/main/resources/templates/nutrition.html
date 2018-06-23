@@ -5,23 +5,27 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<li><a href="http://localhost:8080/pfc/login">Login</a></li>
 <li><a th:href="'http://localhost:8080/pfc/information?name='+${name}">Information</a></li>
 <li><a th:href="'http://localhost:8080/pfc/nutritionStore?name='+${name}">Nutrition Store</a></li>
 <li><a th:href="'http://localhost:8080/pfc/trickCenter?name='+${name}">Trick Center</a></li>
 <li><a th:href="'http://localhost:8080/pfc/actionHistory?name='+${name}">Action History</a></li>
-<form id="" action="" method="post">
+<img src="/greenfox.png" alt="Fox">
+<form id="nutrition" action="" method="post">
     <div>
-        <label for="food">Food:</label>
+        <label for="food">Tricks:</label>
         <select id="food" name="food">
-            <option value="pizza">pizza</option>
-            <option value="salad">salad</option>
-            <option value="cheese">cheese</option>
+            <option th:each="food : ${foods}"
+                    th:value="${food}"
+                    th:utext="${food}">
+            </option>
         </select>
-        <label for="drink">Drink:</label>
+        <label for="drink">Tricks:</label>
         <select id="drink" name="drink">
-            <option value="cola">cola</option>
-            <option value="water">water</option>
-            <option value="wine">wine</option>
+            <option th:each="drink : ${drinks}"
+                    th:value="${drink}"
+                    th:utext="${drink}">
+            </option>
         </select>
         <input type="submit" value="Change">
     </div>

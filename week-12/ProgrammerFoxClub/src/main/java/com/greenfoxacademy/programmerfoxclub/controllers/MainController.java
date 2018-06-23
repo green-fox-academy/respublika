@@ -18,28 +18,14 @@ public class MainController {
         this.foxService = foxService;
     }
 
-    @RequestMapping("/pfc")
+    @RequestMapping(value={"/pfc", "/pfc/information"})
     public String home(@RequestParam(name="name", required=false, defaultValue="Mr. Fox") String name, Model model) {
         foxService.addFox(name);
         model.addAttribute("name", name);
         model.addAttribute("food", foxService.getFox(name).getFood());
         model.addAttribute("drink", foxService.getFox(name).getDrink());
         model.addAttribute("nbtricks", foxService.getFox(name).getTricks().size());
-        model.addAttribute("knowntricks", foxService.getFox(name).knownTricks());
-        model.addAttribute("tricks", foxService.getFox(name).getTricks());
-        model.addAttribute("hasactions", foxService.getFox(name).hasActions());
-        model.addAttribute("actions", foxService.getFox(name).getActions());
-        return "index";
-    }
-
-    @RequestMapping("/pfc/information")
-    public String info(@RequestParam(name="name", required=true, defaultValue="Mr. Fox") String name, Model model) {
-        foxService.addFox(name);
-        model.addAttribute("name", name);
-        model.addAttribute("food", foxService.getFox(name).getFood());
-        model.addAttribute("drink", foxService.getFox(name).getDrink());
-        model.addAttribute("nbtricks", foxService.getFox(name).getTricks().size());
-        model.addAttribute("knowntricks", foxService.getFox(name).knownTricks());
+        model.addAttribute("knowtricks", foxService.getFox(name).knowTricks());
         model.addAttribute("tricks", foxService.getFox(name).getTricks());
         model.addAttribute("hasactions", foxService.getFox(name).hasActions());
         model.addAttribute("actions", foxService.getFox(name).getActions());
@@ -57,14 +43,15 @@ public class MainController {
     }
 
     @GetMapping("/pfc/trickCenter")
-    public String trick(@RequestParam("name") String name, Model model, ArrayList<String> tricks) {
+    public String trick(@RequestParam("name") String name, Model model) {
         model.addAttribute("name", name);
-        model.addAttribute("tricks", foxService.getFox(name).getTricks());
+        model.addAttribute("tricks", foxService.getMainTricks(foxService.getFox(name)));
+        model.addAttribute("hasTrickToLearn", foxService.hasTrickToLearn(foxService.getFox(name)));
         return "trickpage";
     }
 
     @PostMapping(value = "/pfc/trickCenter")
-    public String trickBack(@ModelAttribute("tricks") String trick,
+    public String trickBack(@ModelAttribute(value="trick") String trick,
                             @ModelAttribute("name") String name) {
         foxService.getFox(name).addAction(trick, "trick");
         foxService.getFox(name).addTrick(trick);
@@ -72,13 +59,15 @@ public class MainController {
     }
 
     @GetMapping("/pfc/nutritionStore")
-    public String nutri(@RequestParam("name") String name, Model model) {
+    public String nutrition(@RequestParam("name") String name, Model model, ArrayList<String> foods, ArrayList<String> drinks) {
         model.addAttribute("name", name);
+        model.addAttribute("drinks", foxService.getMainDrinks(foxService.getFox(name)));
+        model.addAttribute("foods", foxService.getMainFoods(foxService.getFox(name)));
         return "nutrition";
     }
 
     @PostMapping(value = "/pfc/nutritionStore")
-    public String nutriBack(@ModelAttribute("drink") String drink,
+    public String nutritionBack(@ModelAttribute("drink") String drink,
                             @ModelAttribute("food") String food,
                             @ModelAttribute("name") String name) {
         foxService.getFox(name).addAction(drink, "drink");
@@ -86,6 +75,15 @@ public class MainController {
         foxService.getFox(name).setDrink(drink);
         foxService.getFox(name).setFood(food);
         return "redirect:/pfc/information?name="+name;
+    }
+
+    @RequestMapping("/pfc/actionHistory")
+    public String actionHist(@RequestParam(name="name", required=true, defaultValue="Mr. Fox") String name, Model model) {
+        foxService.addFox(name);
+        model.addAttribute("name", name);
+        model.addAttribute("hasactions", foxService.getFox(name).hasActions());
+        model.addAttribute("actions", foxService.getFox(name).getActions());
+        return "actions";
     }
 
 }

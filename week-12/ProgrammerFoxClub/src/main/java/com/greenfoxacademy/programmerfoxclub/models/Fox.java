@@ -64,7 +64,7 @@ public class Fox {
         this.drink = drink;
     }
 
-    public boolean knownTricks() {
+    public boolean knowTricks() {
         boolean b;
         if (tricks.size()==0) {
             b=false;
@@ -91,12 +91,12 @@ public class Fox {
     }
 
     public void addAction(String item, String action) {
-        if (this.drink!=item && action=="drink") {
+        if (!this.drink.equals(item) && action=="drink") {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             this.actions.add(dateFormat.format(date)+" : Drink has been changed from:"+this.drink+" to:"+item);
         }
-        if (this.food!=item && action=="food") {
+        if (!this.food.equals(item) && action=="food") {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             this.actions.add(dateFormat.format(date)+" : Food has been changed from:"+this.food+" to:"+item);

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<li><a href="http://localhost:8080/pfc/login">Login</a></li>
 <li><a th:href="'http://localhost:8080/pfc/information?name='+${name}">Information</a></li>
 <li><a th:href="'http://localhost:8080/pfc/nutritionStore?name='+${name}">Nutrition Store</a></li>
 <li><a th:href="'http://localhost:8080/pfc/trickCenter?name='+${name}">Trick Center</a></li>
@@ -12,12 +13,12 @@
 <img src="/greenfox.png" alt="Fox">
 <p th:text="'This is '+${name}+'. Currently living on '+${food}+' and '+${drink}+'. It knows '+${nbtricks}+' tricks.'"></p>
 <h1>Known tricks</h1>
-<div th:if="${knowntricks}">
+<div th:if="${knowtricks}">
     <ul th:each="trick : ${tricks}">
         <li th:text="${trick}"></li>
     </ul>
 </div>
-<div th:unless="${knowntricks}">
+<div th:unless="${knowtricks}">
     <div>Fox doesn't know any tricks yet. Go and learn some.</div>
 </div>
 
