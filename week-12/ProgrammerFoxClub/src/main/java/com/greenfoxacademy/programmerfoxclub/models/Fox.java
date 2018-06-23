@@ -10,6 +10,25 @@ public class Fox {
     private ArrayList<String> tricks;
     private String food;
     private String drink;
+    private ArrayList<String> actions;
+    private String picture;
+    private String currentTrick;
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getCurrentTrick() {
+        return currentTrick;
+    }
+
+    public void setCurrentTrick(String currentTrick) {
+        this.currentTrick = currentTrick;
+    }
 
     public ArrayList<String> getActions() {
         return actions;
@@ -18,8 +37,6 @@ public class Fox {
     public void setActions(ArrayList<String> actions) {
         this.actions = actions;
     }
-
-    private ArrayList<String> actions;
 
     public Fox() {
     }
@@ -30,6 +47,8 @@ public class Fox {
         this.drink="water";
         this.tricks=new ArrayList<>();
         this.actions=new ArrayList<>();
+        this.picture="/greenfox.png";
+        this.currentTrick="do nothing";
     }
 
     public String getName() {

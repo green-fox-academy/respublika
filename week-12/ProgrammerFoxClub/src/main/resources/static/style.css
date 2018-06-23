@@ -1,0 +1,36 @@
+body {
+    background-color: #b3ffd9;
+}
+
+h1 {
+    font-family: "Arial Black";
+}
+
+p {
+    font-family: Arial;
+}
+
+div {
+    font-family: Arial;
+}
+
+nav {
+    background-color: #004d26;
+    line-height: 30px;
+    padding: 5px 5px;
+    font-family: Arial;
+}
+
+a {
+    font-family: Arial;
+    color: white;
+    padding-left: 25px;
+}
+
+label {
+    font-family: Arial;
+}
+
+option {
+    font-family: Arial;
+}

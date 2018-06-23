@@ -12,6 +12,11 @@ public class FoxService {
     private ArrayList<String> tricks=new ArrayList<>();
     private ArrayList<String> foods=new ArrayList<>();
     private ArrayList<String> drinks=new ArrayList<>();
+    private HashMap<String, String> trickPictures;
+
+    public String choosePicture(String trick) {
+        return this.trickPictures.get(trick);
+    }
 
     public ArrayList<String> getMainTricks(Fox fox) {
         ArrayList<String> currentTricks=new ArrayList<>();
@@ -57,21 +62,26 @@ public class FoxService {
         return currentDrinks;
     }
 
-    public void setTricks(ArrayList<String> tricks) {
-        this.tricks = tricks;
-    }
-
     public FoxService(){
         this.foxes=new HashMap<>();
-        this.tricks.add("Write HTML");
-        this.tricks.add("Code Java");
-        this.tricks.add("Play CSS");
+        this.tricks.add("write HTML");
+        this.tricks.add("code Java");
+        this.tricks.add("play with CSS");
+        this.tricks.add("work with Thymeleaf");
         this.foods.add("pizza");
         this.foods.add("cheese");
         this.foods.add("salad");
+        this.foods.add("cake");
         this.drinks.add("cola");
         this.drinks.add("wine");
         this.drinks.add("water");
+        this.drinks.add("coffee");
+        this.trickPictures=new HashMap<>();
+        this.trickPictures.put("do nothing", "/greenfox.png");
+        this.trickPictures.put("write HTML", "/fox-html.gif");
+        this.trickPictures.put("code Java", "/fox-java.gif");
+        this.trickPictures.put("play with CSS", "/fox-css.gif");
+        this.trickPictures.put("work with Thymeleaf", "/fox-thymeleaf.gif");
     }
 
     public void addFox(String name) {

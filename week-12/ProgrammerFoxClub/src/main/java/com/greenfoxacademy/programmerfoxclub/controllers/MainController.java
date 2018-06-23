@@ -1,5 +1,7 @@
 package com.greenfoxacademy.programmerfoxclub.controllers;
 
+
+
 import com.greenfoxacademy.programmerfoxclub.services.FoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ public class MainController {
         this.foxService = foxService;
     }
 
-    @RequestMapping(value={"/pfc", "/pfc/information"})
+    @GetMapping(value={"/pfc", "/pfc/information"})
     public String home(@RequestParam(name="name", required=false, defaultValue="Mr. Fox") String name, Model model) {
         foxService.addFox(name);
         model.addAttribute("name", name);
@@ -29,7 +31,17 @@ public class MainController {
         model.addAttribute("tricks", foxService.getFox(name).getTricks());
         model.addAttribute("hasactions", foxService.getFox(name).hasActions());
         model.addAttribute("actions", foxService.getFox(name).getActions());
+        model.addAttribute("currentTrick", foxService.getFox(name).getCurrentTrick());
+        model.addAttribute("picture", foxService.getFox(name).getPicture());
         return "index";
+    }
+
+    @PostMapping(value={"/pfc", "/pfc/information"})
+    public String homeNewPicture(@ModelAttribute("name") String name,
+                                 @ModelAttribute("currentTrick") String currentTrick) {
+        foxService.getFox(name).setPicture(foxService.choosePicture(currentTrick));
+        foxService.getFox(name).setCurrentTrick(currentTrick);
+        return "redirect:/pfc/information?name="+name;
     }
 
     @GetMapping("/pfc/login")

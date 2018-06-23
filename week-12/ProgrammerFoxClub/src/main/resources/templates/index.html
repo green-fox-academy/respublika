@@ -2,16 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Main Page</title>
+    <link href="/style.css" rel="stylesheet"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<li><a href="http://localhost:8080/pfc/login">Login</a></li>
-<li><a th:href="'http://localhost:8080/pfc/information?name='+${name}">Information</a></li>
-<li><a th:href="'http://localhost:8080/pfc/nutritionStore?name='+${name}">Nutrition Store</a></li>
-<li><a th:href="'http://localhost:8080/pfc/trickCenter?name='+${name}">Trick Center</a></li>
-<li><a th:href="'http://localhost:8080/pfc/actionHistory?name='+${name}">Action History</a></li>
-<img src="/greenfox.png" alt="Fox">
-<p th:text="'This is '+${name}+'. Currently living on '+${food}+' and '+${drink}+'. It knows '+${nbtricks}+' tricks.'"></p>
+<nav>
+    <b><a href="http://localhost:8080/pfc/login">Login</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/information?name='+${name}">Information</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/nutritionStore?name='+${name}">Nutrition Store</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/trickCenter?name='+${name}">Trick Center</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/actionHistory?name='+${name}">Action History</a></b>
+    <img src="/greenfox.png" alt="nav-fox" align="left" width="30px" height="30px">
+</nav>
+<p><img th:src="${picture}" alt="Fox"></p>
+<p th:text="'This is '+${name}+'. Currently living on '+${food}+' and '+${drink}+', while '+${currentTrick}+'. It knows '+${nbtricks}+' tricks.'"></p>
+<div th:if="${knowtricks}">
+    <form id="currentTrick" action="" method="post">
+        <div>
+            <label for="currentTrick">Choose trick to do:</label>
+            <select id="trick" name="currentTrick">
+                <option value="do nothing">do nothing</option>
+                <option th:each="trick : ${tricks}"
+                        th:value="${trick}"
+                        th:utext="${trick}">
+                </option>
+            </select>
+            <input type="submit" value="Do it!">
+        </div>
+    </form>
+</div>
 <h1>Known tricks</h1>
 <div th:if="${knowtricks}">
     <ul th:each="trick : ${tricks}">
