@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller(value="todo")
@@ -22,9 +23,13 @@ public class TodoController {
 
     @GetMapping(value={"/todo"})
     public String todo(Model model) {
-
         model.addAttribute("todos", todoRepository.findAll());
         return "todoslist";
     }
 
+    @GetMapping(value={"/todo/"})
+    public String todoIsActive(@RequestParam("isActive") boolean isActive, Model model) {
+        model.addAttribute("todos", todoRepository.findAllByDone(isActive));
+        return "todoslist";
+    }
 }
