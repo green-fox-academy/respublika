@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Background Color</title>
+    <title>Todo list</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h1 th:text="'Todos for today'+':'"></h1>
+<h1>Todos for today:</h1>
+<p><a href="http://localhost:8080/todo/add">Add new todo</a></p>
 <table style="width:50%; height:200px; font-size: medium">
     <tr>
         <th>ID</th>
@@ -13,6 +14,8 @@
         <th>URGENT</th>
         <th>DONE</th>
         <th>DATE</th>
+        <th></th>
+        <th></th>
     </tr>
     <tr th:each="todo : ${todos}">
         <td th:text="${todo.id}"></td>
@@ -20,6 +23,8 @@
         <td th:text="${todo.urgent}"></td>
         <td th:text="${todo.done}"></td>
         <td th:text="${todo.date}"></td>
+        <td> <a th:href="'http://localhost:8080/todo/'+${todo.id}+'/delete'">delete</a></td>
+        <td> <a th:href="'http://localhost:8080/todo/'+${todo.id}+'/edit'">edit</a></td>
     </tr>
 </table>
 </body>
