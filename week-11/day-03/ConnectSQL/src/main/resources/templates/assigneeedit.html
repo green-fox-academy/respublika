@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit assignee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Edit assignee</h1>
+<p><form id="" action="" method="post">
+    <div><label for="name">Name</label>
+        <input type="text" id="name" name="name" th:field="${assignee.name}"/></div>
+    <div><label for="email">Email</label>
+        <input type="text" id="email" name="email" th:field="${assignee.email}"/></div>
+    <div><button type="submit">Submit</button>
+        <a href="http://localhost:8080/todo/assignees">Cancel</a></div>
+</form></p>
+</body>
+</html>

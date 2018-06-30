@@ -1,7 +1,9 @@
 package com.greenfoxacademy.connectsql.controllers;
 
 
+import com.greenfoxacademy.connectsql.models.Assignee;
 import com.greenfoxacademy.connectsql.models.Todo;
+import com.greenfoxacademy.connectsql.repositories.AssigneeRepository;
 import com.greenfoxacademy.connectsql.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,13 @@ public class TodoController {
     private final
     TodoRepository todoRepository;
 
+    private final
+    AssigneeRepository assigneeRepository;
+
     @Autowired
-    public TodoController(TodoRepository todoRepository) {
+    public TodoController(TodoRepository todoRepository, AssigneeRepository assigneeRepository) {
         this.todoRepository=todoRepository;
+        this.assigneeRepository=assigneeRepository;
     }
 
     @GetMapping(value={"/todo"})
@@ -66,4 +72,50 @@ public class TodoController {
         todoRepository.save(todoRepository.findById(id).get());
         return "redirect:/todo";
     }
+
+    @PostMapping(value={"/todo/search"})
+    public String searchResult(@ModelAttribute("search") String search, Model model) {
+        model.addAttribute("todos", todoRepository.findAllByTitleContainsIgnoreCase(search));
+        return "todosearch";
+    }
+
+    @GetMapping(value={"/todo/assignees"})
+    public String assignees(Model model) {
+        model.addAttribute("assignees", assigneeRepository.findAll());
+        return "assignees";
+    }
+
+    @GetMapping(value={"/todo/assignee/add"})
+    public String addAssignee(Model model) {
+        return "assigneeadd";
+    }
+
+    @PostMapping(value = "/todo/assignee/add")
+    public String addAssigneePost(@ModelAttribute("name") String name, @ModelAttribute("email") String email) {
+        assigneeRepository.save(new Assignee(name, email));
+        return "redirect:/todo/assignees";
+    }
+
+    @GetMapping(value = "/todo/assignees/{assigneeId}/delete")
+    public String deleteAssignee(@PathVariable("assigneeId") Long assigneeId) {
+        assigneeRepository.deleteById(assigneeId);
+        return "redirect:/todo/assignees";
+    }
+
+    @GetMapping(value = "/todo/assignees/{assigneeId}/edit")
+    public String editAssignee(@PathVariable("assigneeId") Long assigneeId, Model model) {
+        model.addAttribute("assignee", assigneeRepository.findById(assigneeId));
+        return "assigneeedit";
+    }
+
+    @PostMapping(value = "/todo/assignees/{assigneeId}/edit")
+    public String edigAssigneePost(@PathVariable("assigneeId") Long assigneeId, @ModelAttribute("name") String name,
+                           @ModelAttribute("email") String email) {
+        assigneeRepository.findById(assigneeId).get().setName(name);
+        assigneeRepository.findById(assigneeId).get().setEmail(email);
+        assigneeRepository.save(assigneeRepository.findById(assigneeId).get());
+        return "redirect:/todo/assignees";
+    }
+
+
 }

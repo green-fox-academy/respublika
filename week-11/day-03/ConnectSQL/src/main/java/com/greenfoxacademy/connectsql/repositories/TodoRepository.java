@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface TodoRepository extends CrudRepository<Todo, Long> {
     List<Todo> findAllByDone(Boolean done);
+    List<Todo> findAllByTitleContainsIgnoreCase(String title);
 }
