@@ -109,7 +109,7 @@ public class TodoController {
     }
 
     @PostMapping(value = "/todo/assignees/{assigneeId}/edit")
-    public String edigAssigneePost(@PathVariable("assigneeId") Long assigneeId, @ModelAttribute("name") String name,
+    public String editAssigneePost(@PathVariable("assigneeId") Long assigneeId, @ModelAttribute("name") String name,
                            @ModelAttribute("email") String email) {
         assigneeRepository.findById(assigneeId).get().setName(name);
         assigneeRepository.findById(assigneeId).get().setEmail(email);
