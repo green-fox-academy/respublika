@@ -50,7 +50,4 @@ public class Assignee {
         return assigneeId;
     }
 
-    public void setAssigneeId(Long assigneeId) {
-        this.assigneeId = assigneeId;
-    }
 }

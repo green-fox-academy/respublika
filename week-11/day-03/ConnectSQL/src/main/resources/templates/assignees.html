@@ -13,12 +13,12 @@
         <th>ID</th>
         <th>NAME</th>
         <th>EMAIL</th>
-        <th></th>
-        <th></th>
+        <th>DELETE</th>
+        <th>EDIT</th>
     </tr>
     <tr th:each="a : ${assignees}">
         <td th:text="${a.assigneeId}"></td>
-        <td th:text="${a.name}"></td>
+        <td> <a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}" th:text="${a.name}"> </a> </td>
         <td th:text="${a.email}"></td>
         <td> <a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}+'/delete'">delete</a></td>
         <td> <a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}+'/edit'">edit</a></td>

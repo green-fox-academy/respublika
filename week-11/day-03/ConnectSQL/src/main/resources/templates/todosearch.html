@@ -5,23 +5,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h1>Todos for today:</h1>
+<h1 th:text="'Search results '+${key}"></h1>
 <table style="width:50%; height:200px; font-size: medium">
     <tr>
         <th>ID</th>
         <th>TITLE</th>
         <th>URGENT</th>
         <th>DONE</th>
-        <th>DATE</th>
-        <th></th>
-        <th></th>
+        <th>CREATION DATE</th>
+        <th>DUE DATE</th>
+        <th>ASSIGNEE</th>
+        <th>DELETE</th>
+        <th>EDIT</th>
     </tr>
     <tr th:each="todo : ${todos}">
         <td th:text="${todo.id}"></td>
         <td th:text="${todo.title}"></td>
         <td th:text="${todo.urgent}"></td>
         <td th:text="${todo.done}"></td>
-        <td th:text="${todo.date}"></td>
+        <td th:text="${todo.crDate}"></td>
+        <td th:text="${todo.dDate}"></td>
+        <td th:if="${todo.assignee != null}"> <a th:href="'http://localhost:8080/todo/assignees/'+${todo.assignee.assigneeId}" th:text="${todo.assignee.name}"> </a> </td>
+        <td th:unless="${todo.assignee != null}">missing assignee</td>
         <td> <a th:href="'http://localhost:8080/todo/'+${todo.id}+'/delete'">delete</a></td>
         <td> <a th:href="'http://localhost:8080/todo/'+${todo.id}+'/edit'">edit</a></td>
     </tr>

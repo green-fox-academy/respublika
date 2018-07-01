@@ -24,7 +24,8 @@ public class Todo {
     private String title;
     private Boolean urgent=false;
     private Boolean done=false;
-    private Date date;
+    private Date crDate;
+    private Date dDate;
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="assignee_id")
     private Assignee assignee;
@@ -34,23 +35,26 @@ public class Todo {
         this.title = title;
         this.urgent = urgent;
         this.done = done;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        this.date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        this.crDate = new Date();
+        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + 60 );
     }
 
     public Todo(String title, Boolean urgent, Boolean done, Assignee assignee) {
         this.title = title;
         this.urgent = urgent;
         this.done = done;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        this.date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        this.crDate = new Date();
+        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + 60 );
         this.assignee=assignee;
     }
 
     public Todo(String title) {
         this.title = title;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        this.date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + 60 );
+        this.crDate = new Date();
     }
 
     public Todo() {
@@ -88,12 +92,20 @@ public class Todo {
         this.done = done;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCrDate() {
+        return crDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCrDate(Date date) {
+        this.crDate = crDate;
+    }
+
+    public Date getdDate() {
+        return dDate;
+    }
+
+    public void setdDate(Date dDate) {
+        this.dDate = dDate;
     }
 
     public Assignee getAssignee() {
