@@ -1,6 +1,5 @@
 package com.greenfoxacademy.connectsql.controllers;
 
-
 import com.greenfoxacademy.connectsql.models.Assignee;
 import com.greenfoxacademy.connectsql.models.Todo;
 import com.greenfoxacademy.connectsql.repositories.AssigneeRepository;
@@ -17,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-@Controller(value="todo")
+@Controller(value = "todo")
 public class TodoController {
 
     private final
@@ -32,7 +31,7 @@ public class TodoController {
     public TodoController(TodoRepository todoRepository, AssigneeRepository assigneeRepository, TodoService todoService) {
         this.todoRepository = todoRepository;
         this.assigneeRepository = assigneeRepository;
-        this.todoService=todoService;
+        this.todoService = todoService;
     }
 
     @GetMapping(value = {"/todo"})
@@ -76,21 +75,70 @@ public class TodoController {
     @PostMapping(value = "/todo/{id}/edit")
     public String editTodo(@PathVariable("id") Long id, @ModelAttribute("title") String title,
                            @ModelAttribute("urgent") String urgent, @ModelAttribute("done") String done,
-                           @ModelAttribute("assignee") Long assigneeID, @ModelAttribute("due") Date dDate) {
+                           @ModelAttribute("assignee") Long assigneeID, @ModelAttribute("due") String dDate) {
+        System.out.println(dDate);
         Boolean urgent2 = Boolean.valueOf(urgent);
         Boolean done2 = Boolean.valueOf(done);
         todoRepository.findById(id).get().setTitle(title);
         todoRepository.findById(id).get().setUrgent(urgent2);
         todoRepository.findById(id).get().setDone(done2);
-        todoRepository.findById(id).get().setdDate(dDate);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            todoRepository.findById(id).get().setdDate(format.parse(dDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         todoRepository.findById(id).get().setAssignee(assigneeRepository.findById(assigneeID).get());
         todoRepository.save(todoRepository.findById(id).get());
         return "redirect:/todo";
     }
 
-    @PostMapping(value = {"/todo/search"})
-    public String searchResult(@ModelAttribute(name="search") String search, @ModelAttribute(value="key") String key, Model model) throws ParseException {
-        model.addAttribute("todos", todoService.getTodos(key, search));
+    @GetMapping("/todo/search")
+    public String search(@ModelAttribute(name = "search") String search, @ModelAttribute(value = "key") String key, Model model) {
+        model.addAttribute("search", search);
+        todoService.setCurrentSearch(search);
+        return "redirect:/todo/search/" + key;
+    }
+
+    @GetMapping(value = {"/todo/search/byTitle"})
+    public String searchResultTitle(Model model) {
+        model.addAttribute("todos", todoRepository.findAllByTitleContainsIgnoreCase(todoService.getCurrentSearch()));
+        model.addAttribute("key", "by Title");
+        return "todosearch";
+    }
+
+    @GetMapping(value = {"/todo/search/byAssignee"})
+    public String searchResultAssignee(Model model) {
+        model.addAttribute("todos", todoRepository.findAllByAssignee(assigneeRepository.findByNameContainsIgnoreCase(todoService.getCurrentSearch())));
+        model.addAttribute("key", "by Assignee");
+        return "todosearch";
+    }
+
+    @GetMapping(value = {"/todo/search/byDueDate"})
+    public String searchResultDue(Model model) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date dueDateSearch = null;
+        try {
+            dueDateSearch = format.parse(todoService.getCurrentSearch());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("todos", todoRepository.findAllByDDate(dueDateSearch));
+        model.addAttribute("key", "by Due Date");
+        return "todosearch";
+    }
+
+    @GetMapping(value = {"/todo/search/byCreationDate"})
+    public String searchResultCreation(Model model) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date creaDateSearch = null;
+        try {
+            creaDateSearch = format.parse(todoService.getCurrentSearch());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("todos", todoRepository.findAllByCrDate(creaDateSearch));
+        model.addAttribute("key", "by Creation Date");
         return "todosearch";
     }
 
@@ -140,7 +188,4 @@ public class TodoController {
         return "todosearch";
     }
 
-
-
 }
-

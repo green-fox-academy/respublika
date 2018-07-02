@@ -6,32 +6,35 @@
 </head>
 <body>
 <h1>Edit todo</h1>
-<p><form id="" action="" method="post">
+<p>
+<form id="" action="" method="post">
     <div><label for="title">Todo Description</label>
         <input type="text" id="title" name="title" th:field="${todo.title}"/></div>
     <div>
-        <label for = "urgent">Urgent</label>
-        <input type="checkbox" id = "urgent" name="urgent" th:field="${todo.urgent}"/>
+        <label for="urgent">Urgent</label>
+        <input type="checkbox" id="urgent" name="urgent" th:field="${todo.urgent}"/>
     </div>
     <div>
-        <label for = "done">Done</label>
-        <input type="checkbox" id = "done" name="done" th:field="${todo.done}"/>
+        <label for="done">Done</label>
+        <input type="checkbox" id="done" name="done" th:field="${todo.done}"/>
     </div>
     <div>
-        <label for = "due">Due date</label>
-        <input type="date" id = "due" name="due" th:field="${todo.dDate}"/>
+        <label for="due">Due date</label>
+        <input type="date" id="due" name="due"/>
     </div>
     <div>
         <label for="assignee">Assignee</label>
         <select id="assignee" name="assignee">
             <option th:each="a : ${assignees}"
-                th:value="${a.assigneeId}"
-                th:utext="${a.name}">
+                    th:value="${a.assigneeId}"
+                    th:utext="${a.name}">
             </option>
         </select>
     </div>
-    <div><button type="submit">Submit</button>
+    <div>
+        <button type="submit">Submit</button>
         <a href="http://localhost:8080/todo">Cancel</a></div>
-</form></p>
+</form>
+</p>
 </body>
 </html>

@@ -7,9 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 @Getter
 @Setter
@@ -22,12 +21,12 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private Boolean urgent=false;
-    private Boolean done=false;
+    private Boolean urgent = false;
+    private Boolean done = false;
     private Date crDate;
     private Date dDate;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="assignee_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "assignee_id")
     private Assignee assignee;
 
 
@@ -35,26 +34,29 @@ public class Todo {
         this.title = title;
         this.urgent = urgent;
         this.done = done;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         this.crDate = new Date();
-        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + 60 );
+        Random random = new Random();
+        int randomDays = random.nextInt(101) + 10;
+        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + randomDays);
     }
 
     public Todo(String title, Boolean urgent, Boolean done, Assignee assignee) {
         this.title = title;
         this.urgent = urgent;
         this.done = done;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         this.crDate = new Date();
-        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + 60 );
-        this.assignee=assignee;
+        Random random = new Random();
+        int randomDays = random.nextInt(101) + 10;
+        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + randomDays);
+        this.assignee = assignee;
     }
 
     public Todo(String title) {
         this.title = title;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + 60 );
         this.crDate = new Date();
+        Random random = new Random();
+        int randomDays = random.nextInt(101) + 10;
+        this.dDate = new Date(crDate.getYear(), crDate.getMonth(), crDate.getDate() + randomDays);
     }
 
     public Todo() {

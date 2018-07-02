@@ -8,19 +8,23 @@
 <h1>Todos for today:</h1>
 <p><a href="http://localhost:8080/todo/add">Add new todo</a></p>
 <p><a href="http://localhost:8080/todo/assignees">List of assignees</a></p>
-<p><form id="" action="/todo/search" method="post">
+<p>
+<form id="" action="/todo/search" method="get">
     <div><label for="search">Search expression*:</label>
         <input type="text" id="search" name="search"/></div>
     <label for="key">Search key:</label>
     <select id="key" name="key">
-        <option th:each="key : ${keys}"
-                th:value="${key}"
-                th:utext="${key}">
-        </option>
+        <option value="byTitle">by Title</option>
+        <option value="byDueDate">by Due Date</option>
+        <option value="byCreationDate">by Creation Date</option>
+        <option value="byAssignee">by Assignee</option>
     </select>
-    <div style="font-size: 8pt">*Required date format: yyyy/MM/dd</div>
-    <div><button type="submit">Search</button></div></p>
-    </form>
+    <div style="font-size: 8pt">*Required date format: YYYY-MM-DD</div>
+    <div>
+        <button type="submit">Search</button>
+    </div>
+</form>
+</p>
 
 <table style="width:50%; height:200px; font-size: medium">
     <tr>
@@ -39,12 +43,14 @@
         <td th:text="${todo.title}"></td>
         <td th:text="${todo.urgent}"></td>
         <td th:text="${todo.done}"></td>
-        <td th:text="${todo.crDate}"></td>
-        <td th:text="${todo.dDate}"></td>
-        <td th:if="${todo.assignee != null}"> <a th:href="'http://localhost:8080/todo/assignees/'+${todo.assignee.assigneeId}" th:text="${todo.assignee.name}"> </a> </td>
+        <td th:text="${#dates.format(todo.crDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#dates.format(todo.dDate, 'yyyy-MM-dd')}"></td>
+        <td th:if="${todo.assignee != null}"><a
+                th:href="'http://localhost:8080/todo/assignees/'+${todo.assignee.assigneeId}"
+                th:text="${todo.assignee.name}"> </a></td>
         <td th:unless="${todo.assignee != null}">missing assignee</td>
-        <td> <a th:href="'http://localhost:8080/todo/'+${todo.id}+'/delete'">delete</a></td>
-        <td> <a th:href="'http://localhost:8080/todo/'+${todo.id}+'/edit'">edit</a></td>
+        <td><a th:href="'http://localhost:8080/todo/'+${todo.id}+'/delete'">delete</a></td>
+        <td><a th:href="'http://localhost:8080/todo/'+${todo.id}+'/edit'">edit</a></td>
     </tr>
 </table>
 </body>

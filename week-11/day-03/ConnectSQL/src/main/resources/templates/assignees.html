@@ -18,10 +18,10 @@
     </tr>
     <tr th:each="a : ${assignees}">
         <td th:text="${a.assigneeId}"></td>
-        <td> <a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}" th:text="${a.name}"> </a> </td>
+        <td><a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}" th:text="${a.name}"> </a></td>
         <td th:text="${a.email}"></td>
-        <td> <a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}+'/delete'">delete</a></td>
-        <td> <a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}+'/edit'">edit</a></td>
+        <td><a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}+'/delete'">delete</a></td>
+        <td><a th:href="'http://localhost:8080/todo/assignees/'+${a.assigneeId}+'/edit'">edit</a></td>
     </tr>
 </table>
 </body>
