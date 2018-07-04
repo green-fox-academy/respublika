@@ -2,6 +2,10 @@ package com.greenfoxacademy.programmerfoxclub.controllers;
 
 
 
+import com.greenfoxacademy.programmerfoxclub.models.Fox;
+import com.greenfoxacademy.programmerfoxclub.models.User;
+import com.greenfoxacademy.programmerfoxclub.repositories.FoxRepository;
+import com.greenfoxacademy.programmerfoxclub.repositories.UserRepository;
 import com.greenfoxacademy.programmerfoxclub.services.FoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +19,37 @@ public class MainController {
     private final
     FoxService foxService;
 
+    private final UserRepository userRepository;
+
+    private final FoxRepository foxRepository;
+
     @Autowired
-    public MainController(FoxService foxService) {
+    public MainController(FoxService foxService, FoxRepository foxRepository, UserRepository userRepository) {
         this.foxService = foxService;
+        this.foxRepository=foxRepository;
+        this.userRepository=userRepository;
     }
 
-    @GetMapping(value={"/pfc", "/pfc/information"})
+    @GetMapping(value = {"/pfc/register"})
+    public String register(Model model) {
+        return "register";
+    }
+
+    @PostMapping(value = "/pfc/register")
+    public String registerUser(@ModelAttribute("userName") String userName,
+                               @ModelAttribute("password1") String password1,
+                               @ModelAttribute("password2") String password2,
+                               Model model) {
+        if (!password1.equals(password2)) {
+            model.addAttribute("message", "Passwords do not match. Try again!");
+        } else {
+            model.addAttribute("message", "Successful registration. You can login now.");
+            userRepository.save(new User(userName, password1, password2));
+        }
+        return "registerfeedback";
+    }
+
+    @GetMapping(value={"/pfc/information"})
     public String home(@RequestParam(name="name", required=false, defaultValue="Mr. Fox") String name, Model model) {
         foxService.addFox(name);
         model.addAttribute("name", name);
@@ -36,7 +65,7 @@ public class MainController {
         return "index";
     }
 
-    @PostMapping(value={"/pfc", "/pfc/information"})
+    @PostMapping(value={"/pfc/information"})
     public String homeNewPicture(@ModelAttribute("name") String name,
                                  @ModelAttribute("currentTrick") String currentTrick) {
         foxService.getFox(name).setPicture(foxService.choosePicture(currentTrick));

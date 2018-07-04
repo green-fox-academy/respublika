@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register Page</title>
+    <link href="/style.css" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Welcome to Programmer Fox Club!</h1>
+<p>Please provide a name, so you can associate it to your pet!</p>
+<p th:if="${message}=='Passwords do not match. Try again!'">
+<form id="" action="/pfc/register" method="post">
+    <div><label for="userName">User name:</label>
+        <input type="text" id="userName" name="userName"/></div>
+    <div><label for="password1">Password:</label>
+        <input type="text" id="password1" name="password1"/></div>
+    <div><label for="password2">Password again:</label>
+        <input type="text" id="password2" name="password2"/></div>
+    <div><button type="submit">Register</button></div>
+</form>
+</p>
+<p th:else="${message}=='Passwords do not match. Try again!'">
+<p th:text="${message}">
+    <div><a href="http://localhost:8080/pfc/login">Login</a></div>
+</p>
+</body>
+</html>

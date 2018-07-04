@@ -1,11 +1,25 @@
 package com.greenfoxacademy.programmerfoxclub.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Fox {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long foxId;
     private String name;
     private ArrayList<String> tricks;
     private String food;
@@ -13,6 +27,9 @@ public class Fox {
     private ArrayList<String> actions;
     private String picture;
     private String currentTrick;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public String getPicture() {
         return picture;
@@ -36,6 +53,22 @@ public class Fox {
 
     public void setActions(ArrayList<String> actions) {
         this.actions = actions;
+    }
+
+    public Long getFoxId() {
+        return foxId;
+    }
+
+    public void setFoxId(Long foxId) {
+        this.foxId = foxId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Fox() {
