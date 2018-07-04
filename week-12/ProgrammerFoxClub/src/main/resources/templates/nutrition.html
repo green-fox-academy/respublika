@@ -8,10 +8,11 @@
 <body>
 <nav>
     <b><a href="http://localhost:8080/pfc/login">Login</a></b>
-    <b><a th:href="'http://localhost:8080/pfc/information?name='+${name}">Information</a></b>
-    <b><a th:href="'http://localhost:8080/pfc/nutritionStore?name='+${name}">Nutrition Store</a></b>
-    <b><a th:href="'http://localhost:8080/pfc/trickCenter?name='+${name}">Trick Center</a></b>
-    <b><a th:href="'http://localhost:8080/pfc/actionHistory?name='+${name}">Action History</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/information?userName='+${userName}">Information</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/nutritionStore?userName='+${userName}">Nutrition Store</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/trickCenter?userName='+${userName}">Trick Center</a></b>
+    <b><a th:href="'http://localhost:8080/pfc/actionHistory?userName='+${userName}">Action History</a></b>
+    <b><a href="http://localhost:8080/pfc/register">Register</a></b>
     <img src="/greenfox.png" alt="nav-fox" align="left" width="30px" height="30px">
 </nav>
 <p><img src="/greenfox.png" alt="Fox"></p>

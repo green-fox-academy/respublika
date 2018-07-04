@@ -8,7 +8,7 @@
 <body>
 <h1>Welcome to Programmer Fox Club!</h1>
 <p>Registration</p>
-<p th:if="${message}=='Passwords do not match. Try again!'" th:text="${message}" style="color: red">
+<b><p th:if="${message}=='Passwords do not match. Try again!'" th:text="${message}" style="color: red"></b>
 <form id="" action="/pfc/register" method="post">
     <div><label for="userName">User name:</label>
         <input type="text" id="userName" name="userName"/></div>
@@ -21,9 +21,9 @@
     <div><button type="submit">Register</button></div>
 </form>
 </p>
-<p th:unless="${message}=='Passwords do not match. Try again!'" th:text="${message}"></p>
-<p th:if="${message}=='Successful registration. You can login now.'">
-    <a href="http://localhost:8080/pfc/login">Login</a>
-</p>
+<b><p th:unless="${message}=='Passwords do not match. Try again!'" th:text="${message}"></p></b>
+<b><p th:if="${message}=='Successful registration. You can login now.'" style="color: black">
+    <a href="http://localhost:8080/pfc/login" style="color: black">Login</a>
+</p></b>
 </body>
 </html>

@@ -31,4 +31,20 @@ public class UserService {
         } else {loginMessage="Haha. Nice try.";}
         return loginMessage;
     }
+
+    public String getLoginMessage() {
+        return loginMessage;
+    }
+
+    public void setLoginMessage(String loginMessage) {
+        this.loginMessage = loginMessage;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }

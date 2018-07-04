@@ -8,10 +8,10 @@
 <body>
 <h1>Welcome to Programmer Fox Club!</h1>
 <p>Please type your username and password!</p>
-<p th:if="${message}=='Successful login, check your fox!'" th:text="${message}"></p>
-<p th:if="${message}=='Successful login, check your fox!'"><a th:href="'http://localhost:8080/pfc/information?userName='+${userName}">Go to your fox</a></p>
-<p th:unless="${message}=='Successful login, check your fox!'" th:text="${message}" style="color: red"></p>
-<p th:unless="${message}=='Successful login, check your fox!'">
+<b><p th:if="${message}=='Successful login, check your fox!'" th:text="${message}"></p></b>
+<b><p th:if="${message}=='Successful login, check your fox!'"><a th:href="'http://localhost:8080/pfc/information?userName='+${userName}" th:style="'color: black'">Go to your fox</a></p></b>
+<b><p th:unless="${message}=='Successful login, check your fox!'" th:text="${message}" style="color: red"></p></b>
+<p th:if="${message}!='Successful login, check your fox!'">
 <form id="" action="/pfc/login" method="post">
     <div><label for="userName">User name:</label>
         <input type="text" id="userName" name="userName"/></div>
