@@ -27,9 +27,6 @@ public class Fox {
     private ArrayList<String> actions;
     private String picture;
     private String currentTrick;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public String getPicture() {
         return picture;
@@ -61,14 +58,6 @@ public class Fox {
 
     public void setFoxId(Long foxId) {
         this.foxId = foxId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Fox() {

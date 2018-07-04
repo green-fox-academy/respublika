@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -21,19 +18,16 @@ public class User {
     private Long userId;
     private String userName;
     private String password;
-    private Boolean registerError=false;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fox_id")
+    private Fox fox;
 
-    public User(String userName, String password1, String password2) {
-        this.userName = userName;
-        this.password = password1;
-        if (!password1.equals(password2)) {
-            this.registerError=true;
-        }
-    }
 
-    public User(String userName, String password) {
+
+    public User(String userName, String password, Fox fox) {
         this.userName = userName;
         this.password = password;
+        this.fox=fox;
     }
 
     public User() {
@@ -61,5 +55,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Fox getFox() {
+        return fox;
+    }
+
+    public void setFox(Fox fox) {
+        this.fox = fox;
     }
 }

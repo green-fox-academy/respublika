@@ -7,8 +7,8 @@
 </head>
 <body>
 <h1>Welcome to Programmer Fox Club!</h1>
-<p>Please provide a name, so you can associate it to your pet!</p>
-<p th:if="${message}=='Passwords do not match. Try again!'">
+<p>Registration</p>
+<p th:if="${message}=='Passwords do not match. Try again!'" th:text="${message}" style="color: red">
 <form id="" action="/pfc/register" method="post">
     <div><label for="userName">User name:</label>
         <input type="text" id="userName" name="userName"/></div>
@@ -16,12 +16,14 @@
         <input type="text" id="password1" name="password1"/></div>
     <div><label for="password2">Password again:</label>
         <input type="text" id="password2" name="password2"/></div>
+    <div><label for="foxName">Select your fox's name:</label>
+        <input type="text" id="foxName" name="foxName"/></div>
     <div><button type="submit">Register</button></div>
 </form>
 </p>
-<p th:else="${message}=='Passwords do not match. Try again!'">
-<p th:text="${message}">
-    <div><a href="http://localhost:8080/pfc/login">Login</a></div>
+<p th:unless="${message}=='Passwords do not match. Try again!'" th:text="${message}"></p>
+<p th:if="${message}=='Successful registration. You can login now.'">
+    <a href="http://localhost:8080/pfc/login">Login</a>
 </p>
 </body>
 </html>
