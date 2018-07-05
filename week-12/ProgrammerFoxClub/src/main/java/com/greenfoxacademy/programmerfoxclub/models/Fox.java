@@ -24,6 +24,8 @@ public class Fox {
     private ArrayList<String> tricks;
     private String food;
     private String drink;
+    @Lob
+    @Column(name="actions", length=512)
     private ArrayList<String> actions;
     private String picture;
     private String currentTrick;

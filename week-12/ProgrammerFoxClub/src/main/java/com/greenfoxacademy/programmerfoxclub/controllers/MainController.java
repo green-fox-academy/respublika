@@ -81,7 +81,7 @@ public class MainController {
         model.addAttribute("actions",  userService.getCurrentUser().getFox().getActions());
         model.addAttribute("currentTrick",  userService.getCurrentUser().getFox().getCurrentTrick());
         model.addAttribute("picture",  userService.getCurrentUser().getFox().getPicture());
-        model.addAttribute("userName",  userService.getCurrentUser().getUserName());
+        model.addAttribute("userName",  userName);
         return "index";
     }
 
@@ -120,8 +120,8 @@ public class MainController {
     }
 
     @GetMapping("/pfc/nutritionStore")
-    public String nutrition(@RequestParam("userName") String userName, Model model, ArrayList<String> foods, ArrayList<String> drinks) {
-        model.addAttribute("userName",  userService.getCurrentUser().getUserName());
+    public String nutrition(@RequestParam("userName") String userName, Model model) {
+        model.addAttribute("userName",  userName);
         model.addAttribute("name", userService.getCurrentUser().getFox().getName());
         model.addAttribute("drinks", foxService.getMainDrinks(userService.getCurrentUser().getFox()));
         model.addAttribute("foods", foxService.getMainFoods(userService.getCurrentUser().getFox()));
@@ -134,19 +134,18 @@ public class MainController {
                                 @ModelAttribute("name") String name,
                                 @ModelAttribute("userName") String userName,
                                 Model model) {
-        model.addAttribute("userName",  userService.getCurrentUser().getUserName());
+        model.addAttribute("userName",  userName);
         userService.getCurrentUser().getFox().addAction(drink, "drink");
         userService.getCurrentUser().getFox().addAction(food, "food");
         userService.getCurrentUser().getFox().setDrink(drink);
         userService.getCurrentUser().getFox().setFood(food);
-        userRepository.save(userService.getCurrentUser());
         foxRepository.save(userService.getCurrentUser().getFox());
         return "redirect:/pfc/information?userName="+userName;
     }
 
     @RequestMapping("/pfc/actionHistory")
     public String actionHist(@RequestParam(name="userName") String userName, Model model) {
-        model.addAttribute("userName",  userService.getCurrentUser().getUserName());
+        model.addAttribute("userName",  userName);
         model.addAttribute("name", userService.getCurrentUser().getFox().getName());
         model.addAttribute("hasactions", userService.getCurrentUser().getFox().hasActions());
         model.addAttribute("actions", userService.getCurrentUser().getFox().getActions());
