@@ -23,11 +23,10 @@ public class User {
     private Fox fox;
 
 
-
     public User(String userName, String password, Fox fox) {
         this.userName = userName;
         this.password = password;
-        this.fox=fox;
+        this.fox = fox;
     }
 
     public User() {

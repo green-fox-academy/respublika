@@ -7,9 +7,9 @@
 </head>
 <body>
 <h1>Welcome to Programmer Fox Club!</h1>
-<p>Registration</p>
-<b><p th:if="${message}=='Passwords do not match. Try again!'" th:text="${message}" style="color: red"></b>
-<form id="" action="/pfc/register" method="post">
+<h2>Registration</h2>
+<b><p th:if="${message}!='Successful registration. You can login now.'" th:text="${message}" style="color: red"></b>
+<form th:if="${message}!='Successful registration. You can login now.'" id="" action="/pfc/register" method="post">
     <div><label for="userName">User name:</label>
         <input type="text" id="userName" name="userName"/></div>
     <div><label for="password1">Password:</label>
@@ -18,10 +18,11 @@
         <input type="text" id="password2" name="password2"/></div>
     <div><label for="foxName">Select your fox's name:</label>
         <input type="text" id="foxName" name="foxName"/></div>
-    <div><button type="submit">Register</button></div>
+    <div>
+        <button type="submit">Register</button>
+    </div>
 </form>
-</p>
-<b><p th:unless="${message}=='Passwords do not match. Try again!'" th:text="${message}"></p></b>
+<b><p th:if="${message}=='Successful registration. You can login now.'" th:text="${message}"></p></b>
 <b><p th:if="${message}=='Successful registration. You can login now.'" style="color: black">
     <a href="http://localhost:8080/pfc/login" style="color: black">Login</a>
 </p></b>

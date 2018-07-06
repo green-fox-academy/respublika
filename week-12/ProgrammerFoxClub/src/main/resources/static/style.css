@@ -21,6 +21,10 @@ nav {
     font-family: Arial;
 }
 
+.active {
+    background-color: #4CAF50;
+}
+
 nav a {
     font-family: Arial;
     color: white;

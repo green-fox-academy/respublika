@@ -9,9 +9,9 @@ import java.util.HashMap;
 @Service
 public class FoxService {
     private HashMap<String, Fox> foxes;
-    private ArrayList<String> tricks=new ArrayList<>();
-    private ArrayList<String> foods=new ArrayList<>();
-    private ArrayList<String> drinks=new ArrayList<>();
+    private ArrayList<String> tricks = new ArrayList<>();
+    private ArrayList<String> foods = new ArrayList<>();
+    private ArrayList<String> drinks = new ArrayList<>();
     private HashMap<String, String> trickPictures;
 
     public String choosePicture(String trick) {
@@ -19,8 +19,8 @@ public class FoxService {
     }
 
     public ArrayList<String> getMainTricks(Fox fox) {
-        ArrayList<String> currentTricks=new ArrayList<>();
-        for (String tr:this.tricks) {
+        ArrayList<String> currentTricks = new ArrayList<>();
+        for (String tr : this.tricks) {
             if (!fox.getTricks().contains(tr)) {
                 currentTricks.add(tr);
             }
@@ -29,22 +29,22 @@ public class FoxService {
     }
 
     public boolean hasTrickToLearn(Fox fox) {
-        ArrayList<String> currentTricks=new ArrayList<>();
-        boolean hasTrick=false;
-        for (String tr:this.tricks) {
+        ArrayList<String> currentTricks = new ArrayList<>();
+        boolean hasTrick = false;
+        for (String tr : this.tricks) {
             if (!fox.getTricks().contains(tr)) {
                 currentTricks.add(tr);
             }
         }
-        if (currentTricks.size()>0) {
-            hasTrick=true;
+        if (currentTricks.size() > 0) {
+            hasTrick = true;
         }
         return hasTrick;
     }
 
     public ArrayList<String> getMainFoods(Fox fox) {
-        ArrayList<String> currentFoods=new ArrayList<>();
-        for (String f:this.foods) {
+        ArrayList<String> currentFoods = new ArrayList<>();
+        for (String f : this.foods) {
             if (!fox.getFood().equals(f)) {
                 currentFoods.add(f);
             }
@@ -53,8 +53,8 @@ public class FoxService {
     }
 
     public ArrayList<String> getMainDrinks(Fox fox) {
-        ArrayList<String> currentDrinks=new ArrayList<>();
-        for (String d:this.drinks) {
+        ArrayList<String> currentDrinks = new ArrayList<>();
+        for (String d : this.drinks) {
             if (!fox.getDrink().equals(d)) {
                 currentDrinks.add(d);
             }
@@ -62,8 +62,8 @@ public class FoxService {
         return currentDrinks;
     }
 
-    public FoxService(){
-        this.foxes=new HashMap<>();
+    public FoxService() {
+        this.foxes = new HashMap<>();
         this.tricks.add("write HTML");
         this.tricks.add("code Java");
         this.tricks.add("play with CSS");
@@ -76,7 +76,7 @@ public class FoxService {
         this.drinks.add("wine");
         this.drinks.add("water");
         this.drinks.add("coffee");
-        this.trickPictures=new HashMap<>();
+        this.trickPictures = new HashMap<>();
         this.trickPictures.put("do nothing", "/greenfox.png");
         this.trickPictures.put("write HTML", "/fox-html.gif");
         this.trickPictures.put("code Java", "/fox-java.gif");

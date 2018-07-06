@@ -7,13 +7,13 @@
 </head>
 <body>
 <nav>
-    <b><a href="http://localhost:8080/pfc/login">Login</a></b>
-    <b><a th:href="'http://localhost:8080/pfc/information?userName='+${userName}">Information</a></b>
+    <b><a style="flood-color: #4CAF50" th:href="'http://localhost:8080/pfc/information?userName='+${userName}">Information</a></b>
     <b><a th:href="'http://localhost:8080/pfc/nutritionStore?userName='+${userName}">Nutrition Store</a></b>
     <b><a th:href="'http://localhost:8080/pfc/trickCenter?userName='+${userName}">Trick Center</a></b>
     <b><a th:href="'http://localhost:8080/pfc/actionHistory?userName='+${userName}">Action History</a></b>
-    <b><a href="http://localhost:8080/pfc/register">Register</a></b>
     <img src="/greenfox.png" alt="nav-fox" align="left" width="30px" height="30px">
+    <b><a style="float:right" href="http://localhost:8080/pfc/login">Sign out</a></b>
+    <b><a style="float:right" href="http://localhost:8080/pfc/register">Register</a></b>
 </nav>
 <p><img src="/greenfox.png" alt="Fox"></p>
 <h1>Action history</h1>

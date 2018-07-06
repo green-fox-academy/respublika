@@ -25,7 +25,7 @@ public class Fox {
     private String food;
     private String drink;
     @Lob
-    @Column(name="actions", length=512)
+    @Column(name = "actions", length = 512)
     private ArrayList<String> actions;
     private String picture;
     private String currentTrick;
@@ -67,12 +67,12 @@ public class Fox {
 
     public Fox(String name) {
         this.name = name;
-        this.food="salad";
-        this.drink="water";
-        this.tricks=new ArrayList<>();
-        this.actions=new ArrayList<>();
-        this.picture="/greenfox.png";
-        this.currentTrick="do nothing";
+        this.food = "salad";
+        this.drink = "water";
+        this.tricks = new ArrayList<>();
+        this.actions = new ArrayList<>();
+        this.picture = "/greenfox.png";
+        this.currentTrick = "do nothing";
     }
 
     public String getName() {
@@ -109,20 +109,20 @@ public class Fox {
 
     public boolean knowTricks() {
         boolean b;
-        if (tricks.size()==0) {
-            b=false;
+        if (tricks.size() == 0) {
+            b = false;
         } else {
-            b=true;
+            b = true;
         }
         return b;
     }
 
     public boolean hasActions() {
         boolean b;
-        if (actions.size()==0) {
-            b=false;
+        if (actions.size() == 0) {
+            b = false;
         } else {
-            b=true;
+            b = true;
         }
         return b;
     }
@@ -134,20 +134,20 @@ public class Fox {
     }
 
     public void addAction(String item, String action) {
-        if (!this.drink.equals(item) && action=="drink") {
+        if (!this.drink.equals(item) && action == "drink") {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
-            this.actions.add(dateFormat.format(date)+" : Drink has been changed from:"+this.drink+" to:"+item);
+            this.actions.add(dateFormat.format(date) + " : Drink has been changed from:" + this.drink + " to:" + item);
         }
-        if (!this.food.equals(item) && action=="food") {
+        if (!this.food.equals(item) && action == "food") {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
-            this.actions.add(dateFormat.format(date)+" : Food has been changed from:"+this.food+" to:"+item);
+            this.actions.add(dateFormat.format(date) + " : Food has been changed from:" + this.food + " to:" + item);
         }
-        if (!this.tricks.contains(item) && action=="trick") {
+        if (!this.tricks.contains(item) && action == "trick") {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
-            this.actions.add(dateFormat.format(date)+" : Learned to:"+item);
+            this.actions.add(dateFormat.format(date) + " : Learned to:" + item);
         }
     }
 }
