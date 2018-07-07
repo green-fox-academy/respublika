@@ -53,4 +53,21 @@ public class RestBackendController {
 
     }
 
+    @PostMapping(value = {"/arrays"})
+    public Object arrayHandler(@RequestBody(required = false) ArrayInput arrayInput) {
+        if (arrayInput!=null && (arrayInput.getWhat().equals("sum") || arrayInput.getWhat().equals("multiply"))) {
+            ArrayHandler arrayHandler = new ArrayHandler();
+            arrayHandler.countResult(arrayInput);
+            return arrayHandler.getResultInt();
+        } else if (arrayInput!=null && arrayInput.getWhat().equals("double")) {
+            ArrayHandler arrayHandler = new ArrayHandler();
+            arrayHandler.countResult(arrayInput);
+            return arrayHandler.getResultList();
+        } else {
+            Error error=new Error("Please provide what to do with the numbers!");
+            return error;
+        }
+
+    }
+
 }
