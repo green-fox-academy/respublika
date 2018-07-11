@@ -6,3 +6,4 @@ links for tasks:<br />
 https://github.com/respublika/git-lesson-repository.git<br />
 https://github.com/respublika/patchwork.git<br />
 https://github.com/respublika/wanderer-java<br />
+https://github.com/respublika/p2p-chat<br />
