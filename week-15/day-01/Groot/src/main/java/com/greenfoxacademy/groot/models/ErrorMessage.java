@@ -1,9 +1,9 @@
 package com.greenfoxacademy.groot.models;
 
-public class Error {
+public class ErrorMessage {
     String error= "I am Groot!";
 
-    public Error() {
+    public ErrorMessage() {
     }
 
 

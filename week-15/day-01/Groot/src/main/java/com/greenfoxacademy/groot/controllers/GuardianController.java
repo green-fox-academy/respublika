@@ -1,6 +1,10 @@
 package com.greenfoxacademy.groot.controllers;
 
 import com.greenfoxacademy.groot.models.Translate;
+import com.greenfoxacademy.groot.models.ErrorMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,13 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class GuardianController {
 
     @PostMapping(value = "/groot")
-    public Object groot(@RequestBody(required = false) String message) {
+    public ResponseEntity<Object> groot(@RequestBody(required = false) String message) {
         if (message==null) {
-            Error error=new Error();
-            return error;
+            return new ResponseEntity<>(new ErrorMessage(), HttpStatus.BAD_REQUEST);
         } else {
-            Translate translate=new Translate(message);
-            return translate;
+            return new ResponseEntity<>(new Translate(message), HttpStatus.OK);
         }
 
     }
